@@ -1,0 +1,1250 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0e0b">
+<title>HEAT SMP | Sua próxima aventura</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0b0e0b;
+    --panel: #151c16;
+    --green: #a3e635;
+    --pale: #d9f99d;
+    --text: #f4f7ef;
+    --muted: #a4afa1;
+    --line: #d9f99d20;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+.container {
+    width: min(1100px, calc(100% - 36px));
+    margin: auto;
+}
+
+/* MENU */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0b0e0bef;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+}
+
+nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font: 700 20px 'Space Grotesk', sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.mark {
+    background: var(--green);
+    color: #17210b;
+    border-radius: 10px;
+    padding: 5px 12px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.links a:hover {
+    color: var(--green);
+}
+
+/* BOTÕES */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 9px;
+    background: var(--green);
+    color: #17210b;
+    font-size: 12px;
+    font-weight: 900;
+    border: 1px solid var(--green);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+}
+
+.btn.alt {
+    background: transparent;
+    color: var(--text);
+    border-color: #ffffff30;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 95px;
+    background:
+        radial-gradient(ellipse at 75% 20%, #45651e55, transparent 42%),
+        radial-gradient(ellipse at 10% 90%, #1c493655, transparent 40%),
+        #101610;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .12;
+    background-image:
+        linear-gradient(#fff1 1px, transparent 1px),
+        linear-gradient(90deg, #fff1 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.tag {
+    display: inline-block;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 7px 12px;
+    color: var(--pale);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.tag::before {
+    content: "●";
+    color: var(--green);
+    margin-right: 9px;
+}
+
+h1 {
+    font: 700 clamp(48px, 8vw, 86px)/.98 'Space Grotesk', sans-serif;
+    letter-spacing: -4px;
+    margin: 25px 0 18px;
+}
+
+h1 em {
+    color: var(--green);
+    font-style: normal;
+}
+
+.hero p {
+    max-width: 570px;
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.note {
+    margin-top: 24px;
+    color: #899487;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* SEÇÕES */
+
+section {
+    padding: 78px 0;
+}
+
+.heading {
+    max-width: 650px;
+    text-align: center;
+    margin: 0 auto 38px;
+}
+
+.kicker {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font: 700 clamp(30px, 4vw, 42px) 'Space Grotesk', sans-serif;
+    letter-spacing: -1px;
+    margin: 8px 0;
+}
+
+.heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* SERVIDOR */
+
+.server-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: linear-gradient(145deg, #1b261c, #121813);
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 24px;
+}
+
+.label {
+    color: var(--pale);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.card h3 {
+    font-size: 21px;
+    margin: 7px 0 15px;
+}
+
+.ip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #090c09;
+    padding: 12px;
+    border-radius: 9px;
+    border: 1px solid #ffffff18;
+}
+
+.ip code {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+    color: #e8f5d8;
+}
+
+.ip button {
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 7px;
+    padding: 9px 12px;
+    background: var(--green);
+    color: #17210b;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.card small {
+    display: block;
+    color: var(--muted);
+    margin-top: 11px;
+}
+
+/* REGRAS */
+
+.rules {
+    background: #0e120e;
+}
+
+.rule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.rule {
+    display: flex;
+    gap: 13px;
+    padding: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+}
+
+.num {
+    flex: 0 0 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background: #a3e63518;
+    color: var(--green);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.rule strong {
+    font-size: 14px;
+}
+
+.rule p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* LOJA VIP */
+
+.vip-section {
+    background: #0b0e0b;
+}
+
+.vip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.vip-card {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 23px;
+    text-align: center;
+    background: linear-gradient(145deg, #1b261c, #121813);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition: .25s;
+}
+
+.vip-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px #a3e63520;
+}
+
+.vip-master {
+    border-color: #a855f770;
+}
+
+.vip-cyber {
+    border-color: #38bdf870;
+}
+
+.vip-esmeralda {
+    border-color: #34d39970;
+}
+
+.vip-card h3 {
+    font: 700 24px 'Space Grotesk', sans-serif;
+}
+
+.vip-price {
+    color: var(--green);
+    font-size: 29px;
+    font-weight: 900;
+    margin: 10px 0 15px;
+}
+
+.vip-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+    background: #090c09;
+    border: 1px solid #ffffff15;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.vip-description {
+    color: var(--muted);
+    font-size: 13px;
+    min-height: 42px;
+    margin-bottom: 20px;
+}
+
+.vip-card .btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* COMUNIDADE */
+
+.community-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.community-copy p {
+    color: var(--muted);
+    margin: 12px 0 22px;
+    max-width: 500px;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.icon {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: #a3e63518;
+    border-radius: 11px;
+    font-size: 20px;
+}
+
+.feature b {
+    display: block;
+    font-size: 14px;
+}
+
+.feature span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* RODAPÉ */
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 25px 0;
+    color: #899487;
+    font-size: 12px;
+}
+
+.foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* AVISO DE CÓPIA */
+
+.toast {
+    position: fixed;
+    z-index: 10001;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+    background: var(--green);
+    color: #17210b;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* JANELA DE PAGAMENTO */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, .85);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    background: #151c16;
+    border: 1px solid #a3e63570;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 0 40px #a3e63520;
+    animation: aparecer .25s ease;
+}
+
+.modal-gem {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.modal-content h2 {
+    color: var(--green);
+    font-size: 25px;
+}
+
+.modal-content > p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.modal-content h3 {
+    color: var(--pale);
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+.valor-pix {
+    color: var(--green);
+    font-size: 36px;
+    font-weight: 900;
+    margin: 12px 0;
+}
+
+.pix-chave {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #090c09;
+    border: 1px solid #ffffff20;
+    border-radius: 9px;
+    padding: 11px;
+    margin: 15px 0;
+}
+
+.pix-chave span {
+    flex: 1;
+    min-width: 0;
+    color: white;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.pix-chave button {
+    flex-shrink: 0;
+    background: var(--green);
+    color: #17210b;
+    border: 0;
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.modal-buttons {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.modal-buttons .btn {
+    width: 100%;
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff10;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.aviso-pix {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+    margin-top: 18px;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 850px) {
+    .vip-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .community-layout {
+        gap: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+    .links {
+        display: none;
+    }
+
+    nav > .btn {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 75px 0;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    section {
+        padding: 58px 0;
+    }
+
+    .server-grid,
+    .rule-grid,
+    .community-layout,
+    .vip-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .community-layout {
+        gap: 28px;
+    }
+
+    .vip-card img {
+        height: 210px;
+    }
+}
+
+@media (max-width: 380px) {
+    .brand {
+        font-size: 16px;
+    }
+
+    nav > .btn {
+        font-size: 9px;
+        padding: 9px;
+    }
+
+    .modal-content {
+        padding: 25px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+
+<header>
+    <div class="container">
+        <nav>
+            <a class="brand" href="#inicio">
+                <span class="mark">H</span>
+                HEAT SMP
+            </a>
+
+            <div class="links">
+                <a href="#servidor">COMO JOGAR</a>
+                <a href="#regras">REGRAS</a>
+                <a href="#vip">VIPs</a>
+                <a href="#comunidade">COMUNIDADE</a>
+            </div>
+
+            <a class="btn" href="#servidor">ENTRAR NO SERVIDOR ↗</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- INÍCIO -->
+
+<section class="hero" id="inicio">
+    <div class="container">
+        <div class="hero-content">
+
+            <div class="tag">SEU MUNDO. SUA HISTÓRIA.</div>
+
+            <h1>
+                CONSTRUA.<br>
+                <em>EXPLORE.</em><br>
+                DO MINE.
+            </h1>
+
+            <p>
+                Um mundo aberto para criar, sobreviver e viver novas aventuras.
+                Reúna seus amigos, construa seu legado e faça parte da comunidade HEAT SMP.
+            </p>
+
+            <div class="actions">
+                <a class="btn" href="#servidor">🎮 COMO JOGAR</a>
+                <a class="btn alt" href="#regras">📜 LER AS REGRAS</a>
+            </div>
+
+            <div class="note">
+                MINECRAFT SMP • JAVA & BEDROCK • COMUNIDADE HEAT
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- COMO JOGAR -->
+
+<section id="servidor">
+    <div class="container">
+
+        <div class="heading">
+            <div class="kicker">COMECE AGORA</div>
+            <h2>Entre no HEAT SMP</h2>
+            <p>Escolha sua edição, copie o endereço e prepare-se para entrar no mundo.</p>
+        </div>
+
+        <div class="server-grid">
+
+            <article class="card">
+                <div class="label">JAVA EDITION</div>
+                <h3>Jogue pelo PC</h3>
+
+                <div class="ip">
+                    <code id="java">servidores.ceu.gg:23494</code>
+                    <button type="button" onclick="copyIP('java')">COPIAR</button>
+                </div>
+
+                <small>Endereço para Minecraft Java Edition.</small>
+            </article>
+
+            <article class="card">
+                <div class="label">BEDROCK EDITION</div>
+                <h3>Jogue pelo celular ou console</h3>
+
+                <div class="ip">
+                    <code id="bedrock">bedrock.ceu.gg</code>
+                    <button type="button" onclick="copyIP('bedrock')">COPIAR</button>
+                </div>
+
+                <small>Porta: <b>34484</b></small>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- REGRAS -->
+
+<section class="rules" id="regras">
+    <div class="container">
+
+        <div class="heading">
+            <div class="kicker">CONVIVÊNCIA</div>
+            <h2>Regras da comunidade</h2>
+            <p>Respeito é essencial para manter o HEAT SMP divertido e seguro para todos.</p>
+        </div>
+
+        <div class="rule-grid">
+
+            <div class="rule">
+                <span class="num">01</span>
+                <div>
+                    <strong>Respeite todos os membros</strong>
+                    <p>Trate todos com respeito, independentemente do cargo ou experiência.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">02</span>
+                <div>
+                    <strong>Não pratique discriminação</strong>
+                    <p>Racismo, preconceito, homofobia ou discriminação são proibidos.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">03</span>
+                <div>
+                    <strong>Evite spam e flood</strong>
+                    <p>Não envie mensagens repetidas nem divulgue conteúdo sem autorização.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">04</span>
+                <div>
+                    <strong>Mantenha a boa convivência</strong>
+                    <p>Evite brigas, provocações e discussões desnecessárias.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">05</span>
+                <div>
+                    <strong>Conteúdo apropriado</strong>
+                    <p>É proibido compartilhar conteúdo adulto (+18) ou impróprio.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">06</span>
+                <div>
+                    <strong>Respeite a equipe</strong>
+                    <p>Não marque a staff sem necessidade. Use os canais corretos.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">07</span>
+                <div>
+                    <strong>Divulgação controlada</strong>
+                    <p>Não divulgue outros servidores sem autorização.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">08</span>
+                <div>
+                    <strong>Use os canais corretamente</strong>
+                    <p>Envie cada assunto no canal correspondente.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">09</span>
+                <div>
+                    <strong>Não se passe por outra pessoa</strong>
+                    <p>É proibido fingir ser membro da staff ou outro jogador.</p>
+                </div>
+            </div>
+
+            <div class="rule">
+                <span class="num">10</span>
+                <div>
+                    <strong>Valorize a comunidade</strong>
+                    <p>Ajude a manter um ambiente acolhedor e respeitoso.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- LOJA VIP -->
+
+<section class="vip-section" id="vip">
+    <div class="container">
+
+        <div class="heading">
+            <div class="kicker">LOJA OFICIAL</div>
+            <h2>Escolha seu VIP</h2>
+            <p>Desbloqueie vantagens e tenha uma experiência ainda melhor no HEAT SMP!</p>
+        </div>
+
+        <div class="vip-grid">
+
+            <!-- VIP MASTER -->
+
+            <article class="vip-card vip-master">
+                <h3>VIP MASTER</h3>
+
+                <div class="vip-price">R$ 30,00</div>
+
+                <img
+                    src="Captura de tela 2026-11-06 221944.png"
+                    alt="Itens do VIP Master"
+                >
+
+                <p class="vip-description">
+                    Kit especial com encantamentos nível 5.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="abrirPagamento('VIP MASTER', 30)"
+                >
+                    ADQUIRIR VIP
+                </button>
+            </article>
+
+            <!-- VIP CYBER -->
+
+            <article class="vip-card vip-cyber">
+                <h3>VIP CYBER</h3>
+
+                <div class="vip-price">R$ 18,00</div>
+
+                <img
+                    src="Captura de tela 2026-11-06 222001.png"
+                    alt="Itens do VIP Cyber"
+                >
+
+                <p class="vip-description">
+                    Kit com encantamentos no nível máximo normal.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="abrirPagamento('VIP CYBER', 18)"
+                >
+                    ADQUIRIR VIP
+                </button>
+            </article>
+
+            <!-- VIP ESMERALDA -->
+
+            <article class="vip-card vip-esmeralda">
+                <h3>VIP ESMERALDA</h3>
+
+                <div class="vip-price">R$ 11,00</div>
+
+                <img
+                    src="Captura de tela 2026-11-06 222006.png"
+                    alt="Itens do VIP Esmeralda"
+                >
+
+                <p class="vip-description">
+                    Encantamentos no nível máximo normal, sem Remendo.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="abrirPagamento('VIP ESMERALDA', 11)"
+                >
+                    ADQUIRIR VIP
+                </button>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- COMUNIDADE -->
+
+<section id="comunidade">
+    <div class="container community-layout">
+
+        <div class="community-copy">
+            <div class="kicker">MAIS QUE UM SERVIDOR</div>
+
+            <h2>Seu próximo capítulo começa aqui.</h2>
+
+            <p>
+                Faça novas amizades, explore o mapa e transforme suas ideias em construções.
+                No HEAT SMP, cada jogador tem espaço para deixar sua marca.
+            </p>
+
+        <div class="actions">
+    <a class="btn" href="#servidor">
+        🎮 CONECTAR AO HEAT SMP
+    </a>
+
+    <a class="btn alt"
+       href="https://discord.gg/xSqS5SHZqG"
+       target="_blank"
+       rel="noopener noreferrer">
+        💬 ENTRAR NO DISCORD
+    </a>
+</div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="icon">⛏️</div>
+                <div>
+                    <b>Explore sem limites</b>
+                    <span>Descubra lugares e crie sua própria jornada.</span>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="icon">🏡</div>
+                <div>
+                    <b>Construa seu legado</b>
+                    <span>Transforme recursos e ideias em grandes projetos.</span>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="icon">🤝</div>
+                <div>
+                    <b>Jogue em comunidade</b>
+                    <span>Conheça jogadores e viva aventuras em conjunto.</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- RODAPÉ -->
+
+<footer>
+    <div class="container foot">
+        <span>© 2026 HEAT SMP. Todos os direitos reservados.</span>
+        <span>Feito para quem vive Minecraft.</span>
+    </div>
+</footer>
+
+<!-- AVISO DE CÓPIA -->
+
+<div class="toast" id="toast">Endereço copiado!</div>
+
+<!-- JANELA ÚNICA DE PAGAMENTO -->
+
+<div class="modal" id="modalPagamento">
+    <div class="modal-content">
+
+        <button
+            type="button"
+            class="fechar"
+            onclick="fecharPagamento()"
+            aria-label="Fechar janela"
+        >×</button>
+
+        <div class="modal-gem"></div>
+
+        <span class="label">LOJA OFICIAL HEAT SMP</span>
+
+        <h2>Finalizar compra</h2>
+
+        <p>Você selecionou:</p>
+
+        <h3 id="nomeVip">VIP MASTER</h3>
+
+        <div class="valor-pix" id="valorVip">R$ 30,00</div>
+
+        <p>Realize o pagamento utilizando a chave PIX:</p>
+
+        <div class="pix-chave">
+            <span id="chavePix">b8af4c96-d7fb-478a-b6e8-35333f77994d</span>
+
+            <button type="button" onclick="copiarPix()">
+                COPIAR
+            </button>
+        </div>
+
+        <div class="modal-buttons">
+
+            <button type="button" class="btn alt" onclick="copiarValor()">
+                COPIAR VALOR
+            </button>
+
+        </div>
+
+        <p class="aviso-pix">
+            Após realizar o pagamento, envie o comprovante à administração
+            para que sua compra seja conferida e seu VIP liberado.
+        </p>
+
+    </div>
+</div>
+
+<script>
+// CONFIGURAÇÃO DA CHAVE PIX
+const CHAVE_PIX = "b8af4c96-d7fb-478a-b6e8-35333f77994d";
+
+// FORMATAÇÃO DE VALORES
+function formatarMoeda(valor) {
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+// COPIAR TEXTO
+async function copiarTexto(texto) {
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(texto);
+        } else {
+            const campo = document.createElement("textarea");
+            campo.value = texto;
+            campo.style.position = "fixed";
+            campo.style.opacity = "0";
+
+            document.body.appendChild(campo);
+            campo.select();
+
+            const sucesso = document.execCommand("copy");
+            campo.remove();
+
+            if (!sucesso) throw new Error("Falha ao copiar");
+        }
+
+        return true;
+    } catch (erro) {
+        console.error("Erro ao copiar:", erro);
+        return false;
+    }
+}
+
+// AVISO NA TELA
+function mostrarToast(mensagem) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = mensagem;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
+// COPIAR IP
+async function copyIP(id) {
+    const elemento = document.getElementById(id);
+    const valor = elemento.textContent.trim();
+
+    const sucesso = await copiarTexto(valor);
+
+    mostrarToast(
+        sucesso ? "Endereço copiado!" : "Não foi possível copiar."
+    );
+}
+
+// ABRIR PAGAMENTO
+function abrirPagamento(nome, valor) {
+    document.getElementById("nomeVip").textContent = nome;
+    document.getElementById("valorVip").textContent = formatarMoeda(valor);
+    document.getElementById("chavePix").textContent = CHAVE_PIX;
+
+    document.getElementById("modalPagamento").style.display = "flex";
+    document.body.classList.add("modal-open");
+}
+
+// FECHAR PAGAMENTO
+function fecharPagamento() {
+    document.getElementById("modalPagamento").style.display = "none";
+    document.body.classList.remove("modal-open");
+}
+
+// COPIAR CHAVE PIX
+async function copiarPix() {
+    if (CHAVE_PIX === "SUA_CHAVE_PIX_AQUI") {
+        alert("Configure a chave PIX do servidor no código primeiro.");
+        return;
+    }
+
+    const sucesso = await copiarTexto(CHAVE_PIX);
+
+    if (sucesso) {
+        mostrarToast("Chave PIX copiada!");
+    } else {
+        alert("Não foi possível copiar a chave PIX.");
+    }
+}
+
+// COPIAR VALOR
+async function copiarValor() {
+    const valor = document.getElementById("valorVip").textContent;
+    const sucesso = await copiarTexto(valor);
+
+    if (sucesso) {
+        mostrarToast("Valor copiado!");
+    } else {
+        alert("Não foi possível copiar o valor.");
+    }
+}
+
+// FECHAR AO CLICAR FORA
+document.getElementById("modalPagamento").addEventListener("click", function(event) {
+    if (event.target === this) {
+        fecharPagamento();
+    }
+});
+
+// FECHAR COM ESC
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        fecharPagamento();
+    }
+});
+</script>
+
+</body>
+</html>
